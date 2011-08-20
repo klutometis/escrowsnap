@@ -4,6 +4,8 @@
   %title Escrowsnap
   = stylesheet_link_tag :all
   %link{ :rel=>"stylesheet/less", :href=>"/stylesheets/bootstrap/lib/bootstrap.less"}
+  = stylesheet_link_tag 'timelinr'
+  
   = javascript_include_tag :defaults, 'jquery', 'less', 'jquery.timelinr'
   = csrf_meta_tag
 %body
@@ -34,75 +36,22 @@
         
   .container
     .row
-      .span6.columns
+      .span3.columns
         %h1 First Column
-      .span10.columns
+      .span13.columns
         #timeline
           %ul#dates
-            - dates = [Date.today..Date.today + 1.month]
-            - dates.each do |day| 
+            - dates = Date.today..Date.today + 1.month
+            - dates.each_with_index do |day, i| 
               %li
-                %a day
+                %a{ :href => "#d#{i}" }= day.to_s
           %ul#issues
-            - dates.each do |day| 
-              %li
-                
-
-      		<ul id="issues"> 
-      			<li id="#1900" class="selected"> 
-      				<img src="images/1.png" width="256" height="256" /> 
-      				<h1>1900</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#1930"> 
-      				<img src="images/2.png" width="256" height="256" /> 
-      				<h1>1930</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#1944"> 
-      				<img src="images/3.png" width="256" height="256" /> 
-      				<h1>1944</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#1950"> 
-      				<img src="images/4.png" width="256" height="256" /> 
-      				<h1>1950</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#1971"> 
-      				<img src="images/5.png" width="256" height="256" /> 
-      				<h1>1971</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#1977"> 
-      				<img src="images/6.png" width="256" height="256" /> 
-      				<h1>1977</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#1989"> 
-      				<img src="images/7.png" width="256" height="256" /> 
-      				<h1>1989</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#1999"> 
-      				<img src="images/8.png" width="256" height="256" /> 
-      				<h1>1999</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#2001"> 
-      				<img src="images/9.png" width="256" height="256" /> 
-      				<h1>2001</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      			<li id="#2011"> 
-      				<img src="images/10.png" width="256" height="256" /> 
-      				<h1>2011</h1> 
-      				<p>Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.</p> 
-      			</li> 
-      		</ul> 
-      		<div id="grad_left"></div> 
-      		<div id="grad_right"></div> 
-      		<a href="#" id="next">+</a> 
-      		<a href="#" id="prev">-</a> 
-      	</div> 
-      	
+            - dates.each_with_index do |day, i| 
+              %li{ :id => "#d#{i}" }
+                = image_tag 'images/1.png', :size => '256x256'
+                %h1= day.to_s
+                %p Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.
+          #grad_left
+          #grad_right
+          %a#next{ :href => '#' } +
+          %a#prev{ :href => '#' } -

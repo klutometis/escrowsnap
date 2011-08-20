@@ -44,7 +44,7 @@ jQuery.fn.timelinr = function(options){
 		// set positions!
 		if(settings.orientation == 'horizontal') {	
 			$(settings.issuesDiv).width(widthIssue*howManyIssues);
-			$(settings.datesDiv).width(widthDate*howManyDates).css('marginLeft',widthContainer/2-widthDate/2);
+      // $(settings.datesDiv).width(widthDate*howManyDates).css('marginLeft',widthContainer/2-widthDate/2);
 			var defaultPositionDates = parseInt($(settings.datesDiv).css("marginLeft").substring(0,$(settings.datesDiv).css("marginLeft").indexOf("px")));
 		} else if(settings.orientation == 'vertical') {
 			$(settings.issuesDiv).height(heightIssue*howManyIssues);
@@ -68,11 +68,11 @@ jQuery.fn.timelinr = function(options){
 			// now moving the dates
 			$(settings.datesDiv+' a').removeClass(settings.datesSelectedClass);
 			$(this).addClass(settings.datesSelectedClass);
-			if(settings.orientation == 'horizontal') {
-				$(settings.datesDiv).animate({'marginLeft':defaultPositionDates-(widthDate*currentIndex)},{queue:false, duration:settings.datesSpeed});
-			} else if(settings.orientation == 'vertical') {
-				$(settings.datesDiv).animate({'marginTop':defaultPositionDates-(heightDate*currentIndex)},{queue:false, duration:settings.datesSpeed});
-			}
+      // if(settings.orientation == 'horizontal') {
+      //  $(settings.datesDiv).animate({'marginLeft':defaultPositionDates-(widthDate*currentIndex)},{queue:false, duration:settings.datesSpeed});
+      // } else if(settings.orientation == 'vertical') {
+      //  $(settings.datesDiv).animate({'marginTop':defaultPositionDates-(heightDate*currentIndex)},{queue:false, duration:settings.datesSpeed});
+      // }
 		});
 
 		$(settings.nextButton).click(function(){
