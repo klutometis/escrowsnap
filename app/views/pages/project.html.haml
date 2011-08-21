@@ -38,6 +38,9 @@
             - when dates.count - 1
               = image_tag 'timeline_house.png'
             - else
+              .markerContent
+                %span.month May
+                %span.dayMarker 30
               = image_tag 'timeline_marker.png'
           
   %ul#issues
