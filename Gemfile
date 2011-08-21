@@ -12,6 +12,7 @@ gem 'barista'
 gem 'faraday'
 gem 'json'
 gem 'simple_form'
+gem 'therubyracer-heroku', '0.8.1.pre3'
 
 # Use unicorn as the web server
 # gem 'unicorn'
