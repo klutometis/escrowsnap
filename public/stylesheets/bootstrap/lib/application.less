@@ -14,7 +14,6 @@ ul#tasks {
   padding: 20px;
   overflow: hidden;
   margin: 0;
-  
   li {
     color: @blue;
     width: 136px;
@@ -25,7 +24,7 @@ ul#tasks {
     list-style-type: none;
     border-right: 2px solid @grayLight;
     .hint {
-      font-size: 14px;
+      font-size: 14px;	
     }
     .label {
       font-size: 16px;
@@ -53,19 +52,34 @@ ul#tasks {
 }
 
 ul#dates {
-  padding: 20px;
+  padding: 0px;
   margin: 0;
+  margin-top:20px;
   background: url(/images/timeline_bar.png) repeat-x;
+  position:relative;
+  background-position:center;
+  padding-top:5px;
+  margin-right:100px;
+  width:704px;
+  padding-left:50px;
+  padding-right:50px;
+
   li {
-    width: 24px;
+    width: 22px;
     background: url(/images/li.png) no-repeat;
-    font-size: 8px;
+    height:20px;
+    font-size:8px;
     position: relative;
     img {
-      position: absolute;
-      left: -20px;
+      position:absolute;
+      z-index:1000;
+      width:50px; 
+      top:0px;
+      left:0px;
+      margin-left:-51px;
     }
   }
+
   li.open, li.close {
     font-size: 10px;
   }
