@@ -73,7 +73,7 @@ class PagesController < ApplicationController
     response = conn.get
     @person = JSON.parse(response.body)
 
-    if @person['permission-level'] == 1
+    if @person['permission-id'] == 1
       redirect_to admin_path
     else
       redirect_to project_path(1)
