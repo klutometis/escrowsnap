@@ -23,7 +23,7 @@
       .date June 30
 #timeline
   %ul#dates
-    - dates = Date.today..Date.today + 29.days
+    - dates = @dates
     - key_dates = []
     - dates.to_a.each_with_index{ |d, i| key_dates << d if ((i+1)%5).zero? and d != dates.last }
     - dates.each_with_index do |day, i| 
@@ -50,5 +50,5 @@
         %li{ :id => "#d#{i+1}" }
           = image_tag 'house.png', :size => '80x80'
           .content
-            %h2 Inspection
+            %h2= task[:name]
             %p= task[:description]

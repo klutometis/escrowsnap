@@ -18,31 +18,21 @@ class PagesController < ApplicationController
   
   def project
     @project_id = params[:id]
-
-    conn = Faraday.new(:url => 'http://ajax.escrowsnap.com/tasks/' + @project_id) do |builder|
-      builder.use Faraday::Request::UrlEncoded  # convert request params as "www-form-urlencoded"
-      builder.use Faraday::Request::JSON        # encode request params as json
-      builder.use Faraday::Response::Logger     # log the request to STDOUT
-      builder.use Faraday::Adapter::NetHttp     # make http requests with Net::HTTP
-
-      # or, use shortcuts:
-      builder.request  :url_encoded
-      builder.request  :json
-      builder.response :logger
-      builder.adapter  :net_http
-    end
-
-    response = conn.get
+    response = connection("projects/#{@project_id}/tasks").get
     @tasks = JSON.parse(response.body)
-    # 
-    # @tasks = [
-    #   { :date => Date.today, :name => 'Open Escrow', :description => "Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula." },
-    #   { :date => Date.today + 4.days, :name => 'Appraisal', :description => 'Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.' },
-    #   { :date => Date.today + 8.days, :name => 'Inspection', :description => 'Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.', :active => true },
-    #   { :date => Date.today + 15.days, :name => 'Insurance', :description => 'Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.' },
-    #   { :date => Date.today + 21.days, :name => 'Loan', :description => 'Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.' },
-    #   { :date => Date.today + 29.days, :name => 'Close Escrow', :description => 'Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.' }
-    # ]
+    @tasks = @tasks.collect do |task|
+      t = { :date => Date.strptime(task['due-date']), :name => task['type-name'], :description => task['type-description'] }
+      if task['type-id'] == 1
+        t.merge!(:open => true)
+        open_date = t[:date]
+      end
+      if task['type-id'] == 2
+        t.merge!(:close => true)
+        close_date = t[:date]
+      end
+    end
+    raise open_date.inspect
+    @dates = open_date..close_date
     
     respond_to do |wants|
       wants.html
@@ -57,7 +47,29 @@ class PagesController < ApplicationController
   def create_session
     @username = params[:login][:username]
     
-    conn = Faraday.new(:url => 'http://ajax.escrowsnap.com/user/' + @username) do |builder|
+    response = connection("people/#{@username}").get
+    @person = JSON.parse(response.body).first
+    if @person['permission-level'] == "Administrator"
+      redirect_to admin_path
+    else
+      redirect_to project_path(1)
+    end
+  end
+  
+  def complete_task
+    @task_id = params[:id]
+    response = connection("tasks/#{@task_id}").put
+    if response
+      flash[:notice] = "Task updated"
+    else
+      flash[:error] = "Couldn't update task"
+    end
+  end
+  
+protected
+  
+  def connection(path)
+    conn = Faraday.new(:url => 'http://ajax.escrowsnap.com/' + path) do |builder|
       builder.use Faraday::Request::UrlEncoded  # convert request params as "www-form-urlencoded"
       builder.use Faraday::Request::JSON        # encode request params as json
       builder.use Faraday::Response::Logger     # log the request to STDOUT
@@ -69,14 +81,6 @@ class PagesController < ApplicationController
       builder.response :logger
       builder.adapter  :net_http
     end
-
-    response = conn.get
-    @person = JSON.parse(response.body)
-
-    if @person['permission-id'] == 1
-      redirect_to admin_path
-    else
-      redirect_to project_path(1)
-    end
   end
+
 end
