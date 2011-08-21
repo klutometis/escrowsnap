@@ -19,7 +19,7 @@ class PagesController < ApplicationController
   def project
     @project_id = params[:id]
 
-    conn = Faraday.new(:url => 'http://localhost/scm/escrowsnap-server/tasks/' + @project_id) do |builder|
+    conn = Faraday.new(:url => 'http://ajax.escrowsnap.com/tasks/' + @project_id) do |builder|
       builder.use Faraday::Request::UrlEncoded  # convert request params as "www-form-urlencoded"
       builder.use Faraday::Request::JSON        # encode request params as json
       builder.use Faraday::Response::Logger     # log the request to STDOUT
