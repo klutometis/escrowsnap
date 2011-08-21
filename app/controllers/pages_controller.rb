@@ -4,12 +4,18 @@ class PagesController < ApplicationController
   end
   
   def admin
-    @projects = [
-      { :address_1 => '2317 Carnegie Lane', :address_2 => '', :city => 'Los Angeles', :state => 'CA', :zip => '90094' },
-      { :address_1 => '246 Dafoe Blvd', :address_2 => '', :city => 'Los Angeles', :state => 'CA', :zip => '90094' },
-      { :address_1 => '130 Catamaran St', :address_2 => '', :city => 'Los Angeles', :state => 'CA', :zip => '90094' },
-      { :address_1 => '4141 Glencoe Ave', :address_2 => '', :city => 'Los Angeles', :state => 'CA', :zip => '90094' },
-    ]
+    @username = 'mary'
+    response = connection.get "/people/#{@username}/projects"
+    @projects = JSON.parse(response.body)
+    project_id = @projects.first['id']
+    response = connection.get "/projects/#{project_id}/tasks"
+    @tasks = JSON.parse(response.body)
+    @tasks = @tasks.collect do |task|
+      t = { :date => Date.strptime(task['due-date']), :name => task['type-name'], :description => task['type-description'] }
+      t.merge!(:open => true) if task['type-id'] == 1#'Open Escrow'
+      t.merge!(:close => true) if task['type-id'] == 2#'Close Escrow'
+      t
+    end
     respond_to do |wants|
       wants.html
       wants.js
@@ -18,24 +24,26 @@ class PagesController < ApplicationController
   
   def project
     @project_id = params[:id]
-    response = connection("projects/#{@project_id}/tasks").get
+    response = connection.get "/projects/#{@project_id}/tasks"
     @tasks = JSON.parse(response.body)
+    open_date = nil
+    close_date = nil
     @tasks = @tasks.collect do |task|
       t = { :date => Date.strptime(task['due-date']), :name => task['type-name'], :description => task['type-description'] }
-      if task['type-id'] == 1
+      if task['type-id'] == 1#'Open Escrow'
         t.merge!(:open => true)
         open_date = t[:date]
       end
-      if task['type-id'] == 2
+      if task['type-id'] == 2#'Close Escrow'
         t.merge!(:close => true)
         close_date = t[:date]
       end
+      t
     end
-    raise open_date.inspect
     @dates = open_date..close_date
     
     respond_to do |wants|
-      wants.html
+      wants.html{ render :layout => 'project' }
       wants.js
     end
   end
@@ -46,8 +54,7 @@ class PagesController < ApplicationController
   
   def create_session
     @username = params[:login][:username]
-    
-    response = connection("people/#{@username}").get
+    response = connection.get "/people/#{@username}"
     @person = JSON.parse(response.body).first
     if @person['permission-level'] == "Administrator"
       redirect_to admin_path
@@ -58,7 +65,17 @@ class PagesController < ApplicationController
   
   def complete_task
     @task_id = params[:id]
-    response = connection("tasks/#{@task_id}").put
+    response = connection.get "/tasks/#{@task_id}&done=1"#, { :done => 1 }
+    if response
+      flash[:notice] = "Task updated"
+    else
+      flash[:error] = "Couldn't update task"
+    end
+  end
+  
+  def uncomplete_task
+    @task_id = params[:id]
+    response = connection.get "/tasks/#{@task_id}&done=0"#, { :done => 0 }
     if response
       flash[:notice] = "Task updated"
     else
@@ -68,8 +85,8 @@ class PagesController < ApplicationController
   
 protected
   
-  def connection(path)
-    conn = Faraday.new(:url => 'http://ajax.escrowsnap.com/' + path) do |builder|
+  def connection
+    conn = Faraday.new(:url => 'http://ajax.escrowsnap.com') do |builder|
       builder.use Faraday::Request::UrlEncoded  # convert request params as "www-form-urlencoded"
       builder.use Faraday::Request::JSON        # encode request params as json
       builder.use Faraday::Response::Logger     # log the request to STDOUT

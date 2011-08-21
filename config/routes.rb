@@ -6,6 +6,8 @@ Escrowsnap::Application.routes.draw do
   match 'admin' => 'pages#admin', :as => 'admin'
   match 'login' => 'pages#login', :as => 'login'
   match 'create_session' => 'pages#create_session', :as => 'create_session'
+  match 'tasks/:id/complete' => 'pages#complete_task', :as => 'complete_task'
+  match 'tasks/:id/uncomplete' => 'pages#uncomplete_task', :as => 'uncomplete_task'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

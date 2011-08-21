@@ -1,0 +1,26 @@
+!!!
+%html
+%head
+  %title Escrowsnap
+  = stylesheet_link_tag :all
+  %link{ :rel=>"stylesheet/less", :href=>"/stylesheets/bootstrap/lib/bootstrap.less"}
+  = stylesheet_link_tag 'timelinr'
+  
+  = javascript_include_tag :defaults, 'jquery', 'less', 'jquery.timelinr'
+  = csrf_meta_tag
+%body
+  .topbar
+    .container.fixed
+      %h3
+        %a.logo 
+      %ul.nav.secondary-nav
+        %li
+          %a{ :href => login_path } Logout
+        
+  #main.container
+    %span.tagline
+    = image_tag 'tagline.png'
+    .row
+      .span3.columns
+      .span13.columns
+        = yield

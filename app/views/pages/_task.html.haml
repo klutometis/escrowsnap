@@ -1,0 +1,10 @@
+%li
+  .listIcon
+  .listText
+    %h1= task[:name]
+    %p= task[:description]
+  .status
+    %img{ :src => '#' }
+    %p Task Due In
+    %h1= pluralize (task[:date] - Date.today).to_i, 'Day'
+    %input{ :type => 'submit' }

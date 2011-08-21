@@ -119,6 +119,9 @@
     <div class="timeline">
     </div>
     <ul>
+      <% @tasks.each do |task| %>
+        <%= render 'task', :task => task %>
+      <% end %>
     <li>
       <div class="listIcon"></div>
       <div class="listText">

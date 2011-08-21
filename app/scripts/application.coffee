@@ -1,3 +1,6 @@
+# Ajax Setup
+jQuery.ajaxSetup 'beforeSend': (xhr) -> xhr.setRequestHeader("Accept", "text/javascript")
+
 jQuery ->
   $().timelinr()
-  $("ul#dates a.selected").click()
+  $("ul#dates a:first").click()
