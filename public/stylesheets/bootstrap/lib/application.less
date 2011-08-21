@@ -181,14 +181,14 @@ ul#issues {
 }
 .span3 ul{  
 width:230px;
-left:-60px;
+left:-0px;
 position:relative;
 box-shadow:inset 0px 0px 25px #ccc;
 border-radius:20px 20px 20px 20px;
 padding-top:30px;
 padding-bottom:30px;
 margin-bottom:100px;
-margin-left:30px;
+margin-left:-30px;
 float:left;
 margin-right:50px;
 
@@ -340,6 +340,7 @@ height:120px;
 .listText h1 {
 margin-bottom:0px;
 padding-bottom:0px;
+font-size:25px;
 }
 
 .status {
@@ -416,6 +417,44 @@ background: -webkit-linear-gradient(top, #9dd53a 0%,#72ad41 50%,#549b09 100%); /
 background: -o-linear-gradient(top, #9dd53a 0%,#72ad41 50%,#549b09 100%); /* Opera11.10+ */
 background: -ms-linear-gradient(top, #9dd53a 0%,#72ad41 50%,#549b09 100%); /* IE10+ */
 background: linear-gradient(top, #9dd53a 0%,#72ad41 50%,#549b09 100%); /* W3C */
+}
+#unComplete{
+background: #499bea; /* Old browsers */
+background: -moz-linear-gradient(top, #499bea 0%, #207ce5 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#499bea), color-stop(100%,#207ce5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #499bea 0%,#207ce5 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #499bea 0%,#207ce5 100%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, #499bea 0%,#207ce5 100%); /* IE10+ */
+background: linear-gradient(top, #499bea 0%,#207ce5 100%); /* W3C */
+color:#fff;
+font-weight:bold;
+float:left;
+border:none;
+border-radius:7px;
+font-family:helvetica neue, helvetica, arial, sans-serif;
+padding:5px 10px;
+width:120px;
+height:30px;
+box-shadow:0px 0px 5px #999;
+}
+#completed {
+background: #eeeeee; /* Old browsers */
+background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Opera11.10+ */
+background: -ms-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* IE10+ */
+background: linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* W3C */
+color:#999;
+font-weight:bold;
+float:left;
+border:none;
+border-radius:7px;
+font-family:helvetica neue, helvetica, arial, sans-serif;
+padding:5px 10px;
+width:120px;
+height:30px;
+box-shadow:0px 0px 5px #999;
 }
 .action {
 width:120px;
