@@ -2,9 +2,10 @@ Escrowsnap::Application.routes.draw do
   
   root :to => "pages#index"
   
-  match 'projects/:id' => 'pages#projects'
-  match 'admin' => 'pages#admin'
-  match 'login' => 'pages#login'
+  match 'project/:id' => 'pages#project', :as => 'project'
+  match 'admin' => 'pages#admin', :as => 'admin'
+  match 'login' => 'pages#login', :as => 'login'
+  match 'create_session' => 'pages#create_session', :as => 'create_session'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
