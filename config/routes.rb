@@ -1,6 +1,10 @@
 Escrowsnap::Application.routes.draw do
   
   root :to => "pages#index"
+  
+  match 'projects/:id' => 'pages#projects'
+  match 'admin' => 'pages#admin'
+  match 'login' => 'pages#login'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

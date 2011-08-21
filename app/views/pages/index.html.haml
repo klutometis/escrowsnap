@@ -1,0 +1,54 @@
+- content_for :sidebar do
+  %h3 Sidebar
+
+#summary
+  %ul#tasks
+    %li.open
+      .label Open Date
+      .date May 30
+    %li.next_task
+      .hint Due in 5 days
+      .label APPRAISAL
+      .date June 6
+    %li
+      .hint Due in 10 days
+      .label INSPECTION
+      .date June 18
+    %li
+      .hint Due in 20 days
+      .label LOAN
+      .date June 22
+    %li.close
+      .label Close Date
+      .date June 30
+#timeline
+  %ul#dates
+    - dates = Date.today..Date.today + 29.days
+    - key_dates = []
+    - dates.to_a.each_with_index{ |d, i| key_dates << d if ((i+1)%5).zero? and d != dates.last }
+    - dates.each_with_index do |day, i| 
+      - classes = ["d#{i+1}"]
+      - classes << 'key_date' if key_dates.include?(day)
+      %li{ :class => classes }
+        - task = @tasks.select{ |t| t[:date] == day }.first
+        - if key_dates.include?(day)
+          %span.day= "Day #{i+1}"
+        - if task.present?
+          %a{ :href => "#d#{dates.to_a.index(day)+1}", :class => task[:active] ? 'selected' : nil }
+            - case i
+            - when 0
+              = image_tag 'timeline_dollar.png'
+            - when dates.count - 1
+              = image_tag 'timeline_house.png'
+            - else
+              = image_tag 'timeline_marker.png'
+          
+  %ul#issues
+    - dates.each_with_index do |day, i| 
+      - task = @tasks.select{ |t| t[:date] == day }.first
+      - if task.present?
+        %li{ :id => "#d#{i+1}" }
+          = image_tag 'house.png', :size => '80x80'
+          .content
+            %h2 Inspection
+            %p= task[:description]
