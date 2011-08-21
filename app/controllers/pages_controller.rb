@@ -9,12 +9,22 @@ class PagesController < ApplicationController
     project_id = @projects.first['id']
     response = connection.get "/projects/#{project_id}/tasks"
     @tasks = JSON.parse(response.body)
+    open_date = nil
+    close_date = nil
     @tasks = @tasks.collect do |task|
       t = { :id => task['type-id'], :date => Date.strptime(task['due-date']), :name => task['type-name'], :description => task['type-description'], :done => task['done'] }
-      t.merge!(:open => true) if task['type-id'] == 1#'Open Escrow'
-      t.merge!(:close => true) if task['type-id'] == 2#'Close Escrow'
+      if task['type-id'] == 1#'Open Escrow'
+        t.merge!(:open => true)
+        open_date = t[:date]
+      end
+      if task['type-id'] == 2#'Close Escrow'
+        t.merge!(:close => true)
+        close_date = t[:date]
+      end
       t
     end
+    @dates = open_date..close_date
+    
     respond_to do |wants|
       wants.html
       wants.js
@@ -81,6 +91,10 @@ class PagesController < ApplicationController
     else
       flash[:error] = "Couldn't update task"
     end
+  end
+  
+  def email
+    render :layout => false
   end
   
 protected
