@@ -66,6 +66,7 @@ class PagesController < ApplicationController
   def complete_task
     @task_id = params[:id]
     response = connection.get "/tasks/#{@task_id}&done=1"#, { :done => 1 }
+
     if response
       flash[:notice] = "Task updated"
     else

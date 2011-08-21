@@ -4,3 +4,8 @@ jQuery.ajaxSetup 'beforeSend': (xhr) -> xhr.setRequestHeader("Accept", "text/jav
 jQuery ->
   $().timelinr()
   $("ul#dates a:first").click()
+
+
+  $('a.get').click (e) -> 
+    e.preventDefault()
+    $.get $(this).attr('href')

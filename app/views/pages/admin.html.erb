@@ -16,98 +16,10 @@
  <div class="demo"> 
 
  <div id="accordion"> 
- 	<h3><a href="#">1746 N. Orange Dr. Hollywood, CA</a></h3> 
- 	<div> 
- 		<p><STRONG>Buyer</strong><br>
-      Asher Kyle Hunt<br>
-      336.596.3588<br>
-      asherhunt@gmail.com<br><br>
+   <% @projects.each do |project| %>
+     <%= render 'project', :project => project %>
+   <% end %>
 
-      <STRONG>Seller</strong><br>
-        Asher Kyle Hunt<br>
-        336.596.3588<br>
-        asherhunt@gmail.com<br><br>
-
-        <STRONG>Buyer's Agent</strong><br>
-          Asher Kyle Hunt<br>
-          336.596.3588<br>
-          asherhunt@gmail.com<br><br>
-
-          <STRONG>Seller's Agent</strong><br>
-            Asher Kyle Hunt<br>
-            336.596.3588<br>
-            asherhunt@gmail.com<br><br></p> 
- 	</div> 
- 	<h3><a href="#">612 Santa Monica Blvd, Los Angeles, CA</a></h3> 
- 	<div> 
- 		<p><STRONG>Buyer</strong><br>
-      Asher Kyle Hunt<br>
-      336.596.3588<br>
-      asherhunt@gmail.com<br><br>
-
-      <STRONG>Seller</strong><br>
-        Asher Kyle Hunt<br>
-        336.596.3588<br>
-        asherhunt@gmail.com<br><br>
-
-        <STRONG>Buyer's Agent</strong><br>
-          Asher Kyle Hunt<br>
-          336.596.3588<br>
-          asherhunt@gmail.com<br><br>
-
-          <STRONG>Seller's Agent</strong><br>
-            Asher Kyle Hunt<br>
-            336.596.3588<br>
-            asherhunt@gmail.com<br><br></p> 
- 	</div> 
- 	<h3><a href="#">101 La Cienega Blvd. Hollywood, CA</a></h3> 
- 	<div> 
- 		<p>
-<STRONG>Buyer</strong><br>
-  Asher Kyle Hunt<br>
-  336.596.3588<br>
-  asherhunt@gmail.com<br><br>
-  
-  <STRONG>Buyer</strong><br>
-    Asher Kyle Hunt<br>
-    336.596.3588<br>
-    asherhunt@gmail.com<br><br>
-    
-    <STRONG>Buyer</strong><br>
-      Asher Kyle Hunt<br>
-      336.596.3588<br>
-      asherhunt@gmail.com<br><br>
-   
-      <STRONG>Buyer</strong><br>
-        Asher Kyle Hunt<br>
-        336.596.3588<br>
-        asherhunt@gmail.com<br><br>
- 		  </p> 
- 	</div> 
- 	<h3><a href="#">1555 Capri Dr. Pacific Palisades, CA</a></h3> 
- 	<div> 
-     		<p>
-    <STRONG>Buyer</strong><br>
-      Asher Kyle Hunt<br>
-      336.596.3588<br>
-      asherhunt@gmail.com<br><br>
-
-      <STRONG>Buyer</strong><br>
-        Asher Kyle Hunt<br>
-        336.596.3588<br>
-        asherhunt@gmail.com<br><br>
-
-        <STRONG>Buyer</strong><br>
-          Asher Kyle Hunt<br>
-          336.596.3588<br>
-          asherhunt@gmail.com<br><br>
-
-          <STRONG>Buyer</strong><br>
-            Asher Kyle Hunt<br>
-            336.596.3588<br>
-            asherhunt@gmail.com<br><br>
-     		  </p>
- 	</div> 
  </div> 
 
  </div>
@@ -115,70 +27,7 @@
 <% end %>
 
 <div id='main'>
-<div class="containerAdmin">
-    <div class="timelineImage">
-      <img src="images/timeline.png">
-    </div>
-    <ul>
-      <% @tasks.each do |task| %>
-        <%= render 'task', :task => task %>
-      <% end %>
-    <li>
-      <div class="listIcon"><img src='images/dolla.png'></div>
-      <div class="listText">
-        <h1>Appraisal</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmaod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="status">
-        <p>Task Due In</p>
-        <h1>5 Days</h1>
-      </div>
-      <div class="action">
-        <input id="remind" type=submit value="Remind Buyer">      <input id="complete" type=submit value="Task Completed">
-      </div>
-    </li>
-    <li>
-      <div class="listIcon"><img src='images/houseicon.png'></div>
-      <div class="listText">
-        <h1>Inspection</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmaod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="status">
-        <p>Task Due In</p>
-        <h1>12 Days</h1>
-      </div>
-      <div class="action">
-        <input id="remind" type=submit value="Remind Buyer">      <input id="complete" type=submit value="Task Completed">
-      </div>
-    </li>
-    <li>
-      <div class="listIcon"><img src='images/roof.png'></div>
-      <div class="listText">
-        <h1>Repairs</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmaod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="status" id="good">
-        <p>Task Due In</p>
-        <h1>20 Days</h1>
-      </div>
-      <div class="action">
-        <input id="remind" type=submit value="Remind Buyer">      <input id="complete" type=submit value="Task Completed">
-      </div>
-    </li>
-    <li>
-      <div class="listIcon"><img src='images/paint.png'></div>
-      <div class="listText">
-        <h1>Painters</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmaod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="status">
-        <p>Task Due In</p>
-        <h1>30 Days</h1>
-      </div>
-      <div class="action">
-        <input id="remind" type=submit value="Remind Buyer">      <input id="complete" type=submit value="Task Completed">
-      </div>
-    </li>
-    </ul> 
-</div>
+  <div class="containerAdmin">
+    <%= render 'tasks' %>
+  <div>
 </div>
