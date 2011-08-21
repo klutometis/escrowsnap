@@ -4,6 +4,9 @@ background-repeat:repeat-x;
 background-position:center top;
 background-size:100%;
 }
+a:hover {
+text-decoration:none;
+}
 #main {
 padding-top: 64px;
 
@@ -444,10 +447,26 @@ margin-bottom:30px;
 position:absolute;
 z-index:2000;
 }
-.month {
+.dayMarker a:hover{
+text-decoration:none;
+}
+.month{
 font-weight:bold;
-margin-left:13px;
-padding-top:20px;
-top:20px;
-
+margin-left:14px;
+margin-top:10px;
+line-height:20px;
+top:50px;
+text-shadow:0px 0px 5px #7d921f;
+color:white;
+position:relative;
+top:5px;
+}
+.dayMarker {
+font-size:25px;
+font-weight:bold;
+text-shadow:0px 1px 0px #fff;
+color:#7d921f;
+position:relative;
+top:-15px;
+left:7px;
 }
