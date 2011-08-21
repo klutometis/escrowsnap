@@ -1,3 +1,4 @@
 $(document).ready(function(){
-  
+  $('.action.complete[data-id=<%= @task_id %>]').hide()
+  $('.action.incomplete[data-id=<%= @task_id %>]').show()
 });

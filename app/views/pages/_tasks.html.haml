@@ -1,0 +1,6 @@
+.timelineImage
+  = image_tag 'timeline.png'
+%ul
+  - image_names = ['dolla.png', 'houseicon.png', 'roof.png', 'paint.png', 'dolla.png', 'houseicon.png', 'roof.png', 'paint.png', 'dolla.png', 'houseicon.png', 'roof.png', 'paint.png', 'dolla.png', 'houseicon.png', 'roof.png', 'paint.png', 'dolla.png', 'houseicon.png', 'roof.png', 'paint.png', 'dolla.png', 'houseicon.png', 'roof.png', 'paint.png']
+  - @tasks.sort_by{ |t| t[:date] }.each_with_index do |task, i| 
+    = render 'task', :task => task, :image_name => image_names[i] 

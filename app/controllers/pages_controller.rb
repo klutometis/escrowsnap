@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   def index
-    redirect_to project_path(1)
   end
   
   def admin
@@ -11,7 +10,7 @@ class PagesController < ApplicationController
     response = connection.get "/projects/#{project_id}/tasks"
     @tasks = JSON.parse(response.body)
     @tasks = @tasks.collect do |task|
-      t = { :date => Date.strptime(task['due-date']), :name => task['type-name'], :description => task['type-description'] }
+      t = { :id => task['type-id'], :date => Date.strptime(task['due-date']), :name => task['type-name'], :description => task['type-description'], :done => task['done'] }
       t.merge!(:open => true) if task['type-id'] == 1#'Open Escrow'
       t.merge!(:close => true) if task['type-id'] == 2#'Close Escrow'
       t
@@ -29,7 +28,7 @@ class PagesController < ApplicationController
     open_date = nil
     close_date = nil
     @tasks = @tasks.collect do |task|
-      t = { :date => Date.strptime(task['due-date']), :name => task['type-name'], :description => task['type-description'] }
+      t = { :id => task['type-id'], :date => Date.strptime(task['due-date']), :name => task['type-name'], :description => task['type-description'], :done => task['done'] }
       if task['type-id'] == 1#'Open Escrow'
         t.merge!(:open => true)
         open_date = t[:date]
@@ -66,6 +65,7 @@ class PagesController < ApplicationController
   def complete_task
     @task_id = params[:id]
     response = connection.get "/tasks/#{@task_id}&done=1"#, { :done => 1 }
+
     if response
       flash[:notice] = "Task updated"
     else
