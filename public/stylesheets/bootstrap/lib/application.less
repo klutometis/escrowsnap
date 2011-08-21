@@ -1,0 +1,87 @@
+#main {
+  margin-top: 64px;
+}
+ul {
+  list-style: none;
+}
+ul#tasks {
+  border: 1px solid @orange;
+  .rounded(10px);
+  position: relative;
+  clear: both;
+  display: block;
+  height: 60px;
+  padding: 20px;
+  overflow: hidden;
+  margin: 0;
+  
+  li {
+    color: @blue;
+    width: 136px;
+    height: 60px;
+    display: inline;
+    float: left;
+    text-align: center;
+    list-style-type: none;
+    border-right: 2px solid @grayLight;
+    .hint {
+      font-size: 14px;
+    }
+    .label {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .date {
+      font-size: 12px;
+    }
+  }
+  li:last-child {
+    border-right: none;
+  }
+  li.open, li.close {
+    .label {
+      font-size: 14px;
+    }
+    .date {
+      font-size: 22px;
+      font-weight: bold;
+    }
+  }
+  li.next_task {
+    color: @orange
+  }
+}
+
+ul#dates {
+  padding: 0;
+  margin: 20px;
+  background: url(/images/timeline_bar.png) repeat-x;
+  li {
+    width: 24px;
+    background: url(/images/li.png) no-repeat;
+    font-size: 8px;
+    
+  }
+  li.open, li.close {
+    font-size: 10px;
+  }
+
+}
+
+ul#issues {
+  color: @grayLighter;
+  padding-left: 58px;
+  img {
+    float: left;
+  }
+  .content {
+    padding-left: 100px;
+  }
+  h2 {
+    color: @gray;
+  }
+  p {
+    color: @grayLight;
+  }
+}
+
