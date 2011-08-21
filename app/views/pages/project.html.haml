@@ -39,8 +39,8 @@
               = image_tag 'timeline_house.png'
             - else
               .markerContent
-                %span.month May
-                %span.dayMarker 30
+                %span.month= day.strftime('%b')
+                %span.dayMarker= day.day.to_i
               = image_tag 'timeline_marker.png'
           
   %ul#issues
