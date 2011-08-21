@@ -53,14 +53,18 @@ ul#tasks {
 }
 
 ul#dates {
-  padding: 0;
-  margin: 20px;
+  padding: 20px;
+  margin: 0;
   background: url(/images/timeline_bar.png) repeat-x;
   li {
     width: 24px;
     background: url(/images/li.png) no-repeat;
     font-size: 8px;
-    
+    position: relative;
+    img {
+      position: absolute;
+      left: -20px;
+    }
   }
   li.open, li.close {
     font-size: 10px;

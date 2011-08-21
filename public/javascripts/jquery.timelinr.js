@@ -18,7 +18,7 @@ jQuery.fn.timelinr = function(options){
 		issuesDiv : 				'#issues',			// value: any HTML tag or #id, default to #issues
 		issuesSelectedClass: 		'selected',			// value: any class, default to selected
 		issuesSpeed: 				200,				// value: integer between 100 and 1000 (recommended), default to 200 (fast)
-		issuesTransparency: 		0.2,				// value: integer between 0 and 1 (recommended), default to 0.2
+		issuesTransparency: 		1,				// value: integer between 0 and 1 (recommended), default to 0.2
 		issuesTransparencySpeed: 	500,				// value: integer between 100 and 1000 (recommended), default to 500 (normal)
 		prevButton: 				'#prev',			// value: any HTML tag or #id, default to #prev
 		nextButton: 				'#next'				// value: any HTML tag or #id, default to #next
@@ -68,11 +68,11 @@ jQuery.fn.timelinr = function(options){
 			// now moving the dates
 			$(settings.datesDiv+' a').removeClass(settings.datesSelectedClass);
 			$(this).addClass(settings.datesSelectedClass);
-      if(settings.orientation == 'horizontal') {
-       $(settings.datesDiv).animate({'marginLeft':defaultPositionDates-(widthDate*currentIndex)},{queue:false, duration:settings.datesSpeed});
-      } else if(settings.orientation == 'vertical') {
-       $(settings.datesDiv).animate({'marginTop':defaultPositionDates-(heightDate*currentIndex)},{queue:false, duration:settings.datesSpeed});
-      }
+      // if(settings.orientation == 'horizontal') {
+      //  $(settings.datesDiv).animate({'marginLeft':defaultPositionDates-(widthDate*currentIndex)},{queue:false, duration:settings.datesSpeed});
+      // } else if(settings.orientation == 'vertical') {
+      //  $(settings.datesDiv).animate({'marginTop':defaultPositionDates-(heightDate*currentIndex)},{queue:false, duration:settings.datesSpeed});
+      // }
 		});
 
 		$(settings.nextButton).click(function(){
@@ -87,8 +87,8 @@ jQuery.fn.timelinr = function(options){
 					$(settings.issuesDiv).animate({'marginLeft':currentPositionIssues-widthIssue},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li').animate({'opacity':settings.issuesTransparency},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li.'+settings.issuesSelectedClass).removeClass(settings.issuesSelectedClass).next().fadeTo(settings.issuesTransparencySpeed, 1).addClass(settings.issuesSelectedClass);
-					$(settings.datesDiv).animate({'marginLeft':currentIssueDate},{queue:false, duration:settings.datesSpeed});
-					$(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
+          // $(settings.datesDiv).animate({'marginLeft':currentIssueDate},{queue:false, duration:settings.datesSpeed});
+          // $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
 				}
 			} else if(settings.orientation == 'vertical') {
 				var currentPositionIssues = parseInt($(settings.issuesDiv).css("marginTop").substring(0,$(settings.issuesDiv).css("marginTop").indexOf("px")));
@@ -101,8 +101,8 @@ jQuery.fn.timelinr = function(options){
 					$(settings.issuesDiv).animate({'marginTop':currentPositionIssues-heightIssue},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li').animate({'opacity':settings.issuesTransparency},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li.'+settings.issuesSelectedClass).removeClass(settings.issuesSelectedClass).next().fadeTo(settings.issuesTransparencySpeed, 1).addClass(settings.issuesSelectedClass);
-					$(settings.datesDiv).animate({'marginTop':currentIssueDate},{queue:false, duration:settings.datesSpeed});
-					$(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
+          // $(settings.datesDiv).animate({'marginTop':currentIssueDate},{queue:false, duration:settings.datesSpeed});
+          // $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
 				}
 			}
 		});
@@ -119,8 +119,8 @@ jQuery.fn.timelinr = function(options){
 					$(settings.issuesDiv).animate({'marginLeft':currentPositionIssues+widthIssue},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li').animate({'opacity':settings.issuesTransparency},{queue:false, duration:settings.issuesSpeed});
           $(settings.issuesDiv+' li.'+settings.issuesSelectedClass).removeClass(settings.issuesSelectedClass).prev().fadeTo(settings.issuesTransparencySpeed, 1).addClass(settings.issuesSelectedClass);
-					$(settings.datesDiv).animate({'marginLeft':currentIssueDate},{queue:false, duration:settings.datesSpeed});
-					$(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().prev().children().addClass(settings.datesSelectedClass);
+          // $(settings.datesDiv).animate({'marginLeft':currentIssueDate},{queue:false, duration:settings.datesSpeed});
+          // $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().prev().children().addClass(settings.datesSelectedClass);
 				}
 			} else if(settings.orientation == 'vertical') {
 				var currentPositionIssues = parseInt($(settings.issuesDiv).css("marginTop").substring(0,$(settings.issuesDiv).css("marginTop").indexOf("px")));
@@ -133,8 +133,8 @@ jQuery.fn.timelinr = function(options){
 					$(settings.issuesDiv).animate({'marginTop':currentPositionIssues+heightIssue},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li').animate({'opacity':settings.issuesTransparency},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li.'+settings.issuesSelectedClass).removeClass(settings.issuesSelectedClass).prev().fadeTo(settings.issuesTransparencySpeed, 1).addClass(settings.issuesSelectedClass);
-					$(settings.datesDiv).animate({'marginTop':currentIssueDate},{queue:false, duration:settings.datesSpeed},{queue:false, duration:settings.issuesSpeed});
-					$(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().prev().children().addClass(settings.datesSelectedClass);
+          // $(settings.datesDiv).animate({'marginTop':currentIssueDate},{queue:false, duration:settings.datesSpeed},{queue:false, duration:settings.issuesSpeed});
+          // $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().prev().children().addClass(settings.datesSelectedClass);
 				}
 			}
 		});
