@@ -55,11 +55,17 @@ class PagesController < ApplicationController
   end
   
   def create_session
-    @person_id = params[:id]
+    @username = params[:login][:username]
     
-    respond_to do |wants|
-      wants.html
-      wants.js
+    # Faraday
+    @person = {
+      'permission-level' => 0
+    }
+    
+    if @person['permission-level'] == 1
+      redirect_to admin_path
+    else
+      redirect_to project_path(1)
     end
   end
 end

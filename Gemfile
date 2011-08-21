@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'barista'
 gem 'faraday'
 gem 'json'
+gem 'simple_form'
 
 # Use unicorn as the web server
 # gem 'unicorn'

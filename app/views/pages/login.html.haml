@@ -1,0 +1,13 @@
+- form_for :login, :url => create_session_path do |f| 
+  %fieldset
+    %legend Login
+    .clearfix
+      %label Username
+      .input
+        = f.text_field :username
+    .clearfix
+      %label Password
+      .input
+        = f.password_field :password
+  .actions
+    %button.btn.large.primary{ :type => 'submit' } Login
