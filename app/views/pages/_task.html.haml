@@ -8,5 +8,8 @@
     %p Task Due In
     %h1= pluralize (task[:date] - Date.today).to_i, 'Day'
   .action
-    %input#remind{ :type => 'submit', :value => 'Remind Buyer' }
-    %input#complete{ :type => 'submit', :value => 'Task Completed' }
+    %input#remind.get{ 'data-path' => complete_task_path(task[:id]) } Send Reminder
+    %input#complete.get{ 'data-path' => complete_task_path(task[:id]) } Task Completed
+  .action.complete{ :style => 'display:none' }
+    %input#completed.get{ 'data-path' => uncomplete_task_path(task[:id]) } Send Reminder
+    %input#unComplete.get{ 'data-path' => uncomplete_task_path(task[:id]) } Reopen Task
