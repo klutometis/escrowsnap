@@ -6,6 +6,10 @@ jQuery ->
   $("ul#dates a:first").click()
 
 
-  $('a.get').click (e) -> 
+  $('a.get').live 'click', (e) -> 
     e.preventDefault()
     $.get $(this).attr('href')
+  
+  $('button.get').live 'click', (e) ->
+    e.preventDefault()
+    $.get $(this).attr('data-path')

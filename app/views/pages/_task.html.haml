@@ -7,9 +7,9 @@
   .status
     %p Task Due In
     %h1= pluralize (task[:date] - Date.today).to_i, 'Day'
-  .action
-    %input#remind.get{ 'data-path' => complete_task_path(task[:id]) } Send Reminder
-    %input#complete.get{ 'data-path' => complete_task_path(task[:id]) } Task Completed
-  .action.complete{ :style => 'display:none' }
-    %input#completed.get{ 'data-path' => uncomplete_task_path(task[:id]) } Send Reminder
-    %input#unComplete.get{ 'data-path' => uncomplete_task_path(task[:id]) } Reopen Task
+  .action.incomplete{ 'data-id' => task[:id], :style => task[:done] == 1 ? 'display:none' : '' }
+    %button#remind.get{ :type => 'submit', 'data-path' => complete_task_path(task[:id]) } Send Reminder
+    %button#complete.get{ :type => 'submit', 'data-path' => complete_task_path(task[:id]) } Complete Task
+  .action.complete{ 'data-id' => task[:id], :style => task[:done] == 0 ? 'display:none' : '' }
+    %button#completed.get{ :type => 'submit', 'data-path' => uncomplete_task_path(task[:id]) } Task Complete
+    %button#unComplete.get{ :type => 'submit', 'data-path' => uncomplete_task_path(task[:id]) } Reopen Task

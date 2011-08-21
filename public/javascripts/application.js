@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Sun, 21 Aug 2011 19:52:22 GMT from
+/* DO NOT MODIFY. This file was compiled Sun, 21 Aug 2011 21:19:19 GMT from
  * /Users/micah/rails/escrowsnap/app/scripts/application.coffee
  */
 
@@ -11,9 +11,13 @@
   jQuery(function() {
     $().timelinr();
     $("ul#dates a:first").click();
-    return $('a.get').click(function(e) {
+    $('a.get').live('click', function(e) {
       e.preventDefault();
       return $.get($(this).attr('href'));
+    });
+    return $('button.get').live('click', function(e) {
+      e.preventDefault();
+      return $.get($(this).attr('data-path'));
     });
   });
 }).call(this);
