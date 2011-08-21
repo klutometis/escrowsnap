@@ -9,6 +9,8 @@ gem 'sqlite3'
 gem 'haml'
 gem 'jquery-rails'
 gem 'barista'
+gem 'faraday'
+gem 'json'
 
 # Use unicorn as the web server
 # gem 'unicorn'
