@@ -78,9 +78,7 @@ jQuery.fn.timelinr = function(options){
 		$(settings.nextButton).click(function(){
 			if(settings.orientation == 'horizontal') {
 				var currentPositionIssues = parseInt($(settings.issuesDiv).css("marginLeft").substring(0,$(settings.issuesDiv).css("marginLeft").indexOf("px")));
-				var currentIssueIndex = currentPositionIssues/widthIssue;
-				console.debug(currentIssueIndex);
-				
+				var currentIssueIndex = currentPositionIssues/widthIssue;				
 				var currentPositionDates = parseInt($(settings.datesDiv).css("marginLeft").substring(0,$(settings.datesDiv).css("marginLeft").indexOf("px")));
 				var currentIssueDate = currentPositionDates-widthDate;
 				if(currentPositionIssues <= -(widthIssue*howManyIssues-(widthIssue))) {
