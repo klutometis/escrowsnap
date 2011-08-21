@@ -1,9 +1,10 @@
-/* DO NOT MODIFY. This file was compiled Sat, 20 Aug 2011 19:18:41 GMT from
+/* DO NOT MODIFY. This file was compiled Sun, 21 Aug 2011 02:44:09 GMT from
  * /Users/micah/rails/escrowsnap/app/scripts/application.coffee
  */
 
 (function() {
   jQuery(function() {
-    return $().timelinr();
+    $().timelinr();
+    return $("ul#dates a.selected").click();
   });
 }).call(this);

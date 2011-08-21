@@ -37,58 +37,6 @@
   #main.container
     .row
       .span3.columns
-        %h1 First Column
+        = yield :sidebar
       .span13.columns
-        #summary
-          %ul#tasks
-            %li.open
-              .label Open Date
-              .date May 30
-            %li.next_task
-              .hint Due in 5 days
-              .label APPRAISAL
-              .date June 6
-            %li
-              .hint Due in 10 days
-              .label INSPECTION
-              .date June 18
-            %li
-              .hint Due in 20 days
-              .label LOAN
-              .date June 22
-            %li.close
-              .label Close Date
-              .date June 30
-        #timeline
-          %ul#dates
-            - dates = Date.today..Date.today + 29.days
-            - task_dates = [Date.today + 1.week, Date.today + 2.weeks]
-            - key_dates = []
-            - dates.to_a.each_with_index{ |d, i| key_dates << d if ((i+1)%5).zero? and d != dates.last }
-            - dates.each_with_index do |day, i| 
-              - classes = ["d#{i+1}"]
-              - classes << 'task_date' if task_dates.include?(day)
-              - classes << 'key_date' if key_dates.include?(day)
-              %li{ :class => classes }
-                - if key_dates.include?(day)
-                  %span.day= "Day #{i+1}"
-                - if i == 0
-                  %span.day= "Day #{i+1}"
-                  %a{ :href => "#d#{i+1}" }
-                    = image_tag 'timeline_dollar.png'
-                - if i == dates.count - 1
-                  %span.day= "Day #{i+1}"
-                  %a{ :href => "#d#{i+1}" }
-                    = image_tag 'timeline_house.png'
-                  
-          %ul#issues
-            - dates.each_with_index do |day, i| 
-              %li{ :id => "#d#{i}" }
-                = image_tag 'house.png', :size => '80x80'
-                .content
-                  %h2 Inspection
-                  %p Donec semper quam scelerisque tortor dictum gravida. In hac habitasse platea dictumst. Nam pulvinar, odio sed rhoncus suscipit, sem diam ultrices mauris, eu consequat purus metus eu velit. Proin metus odio, aliquam eget molestie nec, gravida ut sapien. Phasellus quis est sed turpis sollicitudin venenatis sed eu odio. Praesent eget neque eu eros interdum malesuada non vel leo. Sed fringilla porta ligula.
-          -# #grad_left
-          -# #grad_right
-          %a#next{ :href => '#' } +
-          %a#prev{ :href => '#' } -
+        = yield

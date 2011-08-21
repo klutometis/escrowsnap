@@ -55,8 +55,7 @@ jQuery.fn.timelinr = function(options){
 		$(settings.datesDiv+' a').click(function(){
 			// first vars
 			var whichIssue = $(this).text();
-			var currentIndex = $(this).parent().prevAll().length;
-	
+			var currentIndex = $(this).parent().prevAll().find('a').length;
 			// moving the elements
 			if(settings.orientation == 'horizontal') {
 				$(settings.issuesDiv).animate({'marginLeft':-widthIssue*currentIndex},{queue:false, duration:settings.issuesSpeed});
@@ -79,6 +78,8 @@ jQuery.fn.timelinr = function(options){
 			if(settings.orientation == 'horizontal') {
 				var currentPositionIssues = parseInt($(settings.issuesDiv).css("marginLeft").substring(0,$(settings.issuesDiv).css("marginLeft").indexOf("px")));
 				var currentIssueIndex = currentPositionIssues/widthIssue;
+				console.debug(currentIssueIndex);
+				
 				var currentPositionDates = parseInt($(settings.datesDiv).css("marginLeft").substring(0,$(settings.datesDiv).css("marginLeft").indexOf("px")));
 				var currentIssueDate = currentPositionDates-widthDate;
 				if(currentPositionIssues <= -(widthIssue*howManyIssues-(widthIssue))) {
@@ -88,7 +89,7 @@ jQuery.fn.timelinr = function(options){
 					$(settings.issuesDiv+' li').animate({'opacity':settings.issuesTransparency},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li.'+settings.issuesSelectedClass).removeClass(settings.issuesSelectedClass).next().fadeTo(settings.issuesTransparencySpeed, 1).addClass(settings.issuesSelectedClass);
           // $(settings.datesDiv).animate({'marginLeft':currentIssueDate},{queue:false, duration:settings.datesSpeed});
-          // $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
+          $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
 				}
 			} else if(settings.orientation == 'vertical') {
 				var currentPositionIssues = parseInt($(settings.issuesDiv).css("marginTop").substring(0,$(settings.issuesDiv).css("marginTop").indexOf("px")));
@@ -102,7 +103,7 @@ jQuery.fn.timelinr = function(options){
 					$(settings.issuesDiv+' li').animate({'opacity':settings.issuesTransparency},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li.'+settings.issuesSelectedClass).removeClass(settings.issuesSelectedClass).next().fadeTo(settings.issuesTransparencySpeed, 1).addClass(settings.issuesSelectedClass);
           // $(settings.datesDiv).animate({'marginTop':currentIssueDate},{queue:false, duration:settings.datesSpeed});
-          // $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
+          $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
 				}
 			}
 		});
@@ -120,7 +121,10 @@ jQuery.fn.timelinr = function(options){
 					$(settings.issuesDiv+' li').animate({'opacity':settings.issuesTransparency},{queue:false, duration:settings.issuesSpeed});
           $(settings.issuesDiv+' li.'+settings.issuesSelectedClass).removeClass(settings.issuesSelectedClass).prev().fadeTo(settings.issuesTransparencySpeed, 1).addClass(settings.issuesSelectedClass);
           // $(settings.datesDiv).animate({'marginLeft':currentIssueDate},{queue:false, duration:settings.datesSpeed});
-          // $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().prev().children().addClass(settings.datesSelectedClass);
+          $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass);
+          // $(settings.datesDiv+' a[href=#'+$(settings.issuesDiv+' li').attr('id')+']').addClass(settings.datesSelectedClass)
+          $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().next().children().addClass(settings.datesSelectedClass);
+          
 				}
 			} else if(settings.orientation == 'vertical') {
 				var currentPositionIssues = parseInt($(settings.issuesDiv).css("marginTop").substring(0,$(settings.issuesDiv).css("marginTop").indexOf("px")));
@@ -134,7 +138,7 @@ jQuery.fn.timelinr = function(options){
 					$(settings.issuesDiv+' li').animate({'opacity':settings.issuesTransparency},{queue:false, duration:settings.issuesSpeed});
 					$(settings.issuesDiv+' li.'+settings.issuesSelectedClass).removeClass(settings.issuesSelectedClass).prev().fadeTo(settings.issuesTransparencySpeed, 1).addClass(settings.issuesSelectedClass);
           // $(settings.datesDiv).animate({'marginTop':currentIssueDate},{queue:false, duration:settings.datesSpeed},{queue:false, duration:settings.issuesSpeed});
-          // $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().prev().children().addClass(settings.datesSelectedClass);
+          $(settings.datesDiv+' a.'+settings.datesSelectedClass).removeClass(settings.datesSelectedClass).parent().prev().children().addClass(settings.datesSelectedClass);
 				}
 			}
 		});
